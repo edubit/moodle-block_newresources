@@ -1,2 +1,2 @@
-moodle--block_newresources
+moodle-block_newresources
 ==========================
