@@ -14,18 +14,10 @@ class block_newresources extends block_base {
 
     protected $timestart = null;
 
-    /**
-     * Initialises the block
-     */
     function init() {
         $this->title = get_string('pluginname', 'block_newresources');
     }
-
-    /**
-     * Returns the content object
-     *
-     * @return stdObject
-     */
+    
     function get_content() {
 		global $USER, $DB, $COURSE;
 		
@@ -109,6 +101,126 @@ class block_newresources extends block_base {
 
 	// Enable global configuration
 	function has_config() {return true;}
-  
+
+    /**
+     * cron - goes through all feeds and retrieves them with the cache
+     * duration set to 0 in order to force the retrieval of the item and
+     * refresh the cache
+     *
+     * @return boolean true if all feeds were retrieved succesfully
+     */
+    function cron() {
+        global $CFG;
+
+		//Global configuration Block
+		$notify = get_config('newresources', 'notify');
+		$freqnotify = get_config('newresources', 'freqnotify');
+		$hourstimenotify = get_config('newresources', 'hourstimenotify');
+		$minutestimenotify = get_config('newresources', 'minutestimenotify');
+		$blocktime = $hourstimenotify.':'.$minutestimenotify;
+		
+		$now = date('H:i');
+		
+mtrace($now);
+mtrace($blocktime);
+
+$day = date('N');
+mtrace($day);
+
+		if ($freqnotify == 'diario' || $day == 1) {
+			$freq = true;
+		} else {
+			$freq = false;
+		}
+
+		mtrace($freqnotify);
+
+		if ($notify && $now == $blocktime) {
+		    mtrace('newresources-ON');
+
+		
+		} else {
+		    mtrace(get_string('notificationsdisabled', 'block_newresources'));
+		}
+		
+		return true;
+		
+		
+		// Prepare to actually send the post now, and build up the content
+// 
+// 		$cleanforumname = str_replace('"', "'", strip_tags(format_string($forum->name)));
+// 
+// 		$userfrom->customheaders = array (  // Headers to make emails easier to track
+// 				   'Precedence: Bulk',
+// 				   'List-Id: "'.$cleanforumname.'" <moodleforum'.$forum->id.'@'.$hostname.'>',
+// 				   'List-Help: '.$CFG->wwwroot.'/mod/forum/view.php?f='.$forum->id,
+// 				   'Message-ID: '.forum_get_email_message_id($post->id, $userto->id, $hostname),
+// 				   'X-Course-Id: '.$course->id,
+// 				   'X-Course-Name: '.format_string($course->fullname, true)
+// 		);
+// 
+// 		if ($post->parent) {  // This post is a reply, so add headers for threading (see MDL-22551)
+// 			$userfrom->customheaders[] = 'In-Reply-To: '.forum_get_email_message_id($post->parent, $userto->id, $hostname);
+// 			$userfrom->customheaders[] = 'References: '.forum_get_email_message_id($post->parent, $userto->id, $hostname);
+// 		}
+// 
+// 		$shortname = format_string($course->shortname, true, array('context' => context_course::instance($course->id)));
+// 
+// 		$postsubject = html_to_text("$shortname: ".format_string($post->subject, true));
+// 		$posttext = forum_make_mail_text($course, $cm, $forum, $discussion, $post, $userfrom, $userto);
+// 		$posthtml = forum_make_mail_html($course, $cm, $forum, $discussion, $post, $userfrom, $userto);
+// 
+// 		// Send the post now!
+// 
+// 		mtrace('Sending ', '');
+// 
+// 		$eventdata = new stdClass();
+// 		$eventdata->component        = 'mod_forum';
+// 		$eventdata->name             = 'posts';
+// 		$eventdata->userfrom         = $userfrom;
+// 		$eventdata->userto           = $userto;
+// 		$eventdata->subject          = $postsubject;
+// 		$eventdata->fullmessage      = $posttext;
+// 		$eventdata->fullmessageformat = FORMAT_PLAIN;
+// 		$eventdata->fullmessagehtml  = $posthtml;
+// 		$eventdata->notification = 1;
+// 
+// 		// If forum_replytouser is not set then send mail using the noreplyaddress.
+// 		if (empty($CFG->forum_replytouser)) {
+// 			// Clone userfrom as it is referenced by $users.
+// 			$cloneduserfrom = clone($userfrom);
+// 			$cloneduserfrom->email = $CFG->noreplyaddress;
+// 			$eventdata->userfrom = $cloneduserfrom;
+// 		}
+// 
+// 		$smallmessagestrings = new stdClass();
+// 		$smallmessagestrings->user = fullname($userfrom);
+// 		$smallmessagestrings->forumname = "$shortname: ".format_string($forum->name,true).": ".$discussion->name;
+// 		$smallmessagestrings->message = $post->message;
+// 		//make sure strings are in message recipients language
+// 		$eventdata->smallmessage = get_string_manager()->get_string('smallmessage', 'forum', $smallmessagestrings, $userto->lang);
+// 
+// 		$eventdata->contexturl = "{$CFG->wwwroot}/mod/forum/discuss.php?d={$discussion->id}#p{$post->id}";
+// 		$eventdata->contexturlname = $discussion->name;
+// 
+// 		$mailresult = message_send($eventdata);
+// 		if (!$mailresult){
+// 			mtrace("Error: mod/forum/lib.php forum_cron(): Could not send out mail for id $post->id to user $userto->id".
+// 				 " ($userto->email) .. not trying again.");
+// 			add_to_log($course->id, 'forum', 'mail error', "discuss.php?d=$discussion->id#p$post->id",
+// 					   substr(format_string($post->subject,true),0,30), $cm->id, $userto->id);
+// 			$errorcount[$post->id]++;
+// 		} else {
+// 			$mailcount[$post->id]++;
+// 
+// 		// Mark post as read if forum_usermarksread is set off
+// 			if (!$CFG->forum_usermarksread) {
+// 				$userto->markposts[$post->id] = $post->id;
+// 			}
+// 		}
+// 
+// 		mtrace('post '.$post->id. ': '.$post->subject);
+
+    }  
   
 }   // Here's the closing bracket for the class definition

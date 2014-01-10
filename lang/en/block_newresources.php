@@ -20,6 +20,8 @@ $string['labelnotify'] = 'Nofify';
 $string['descnotify'] = '';
 $string['labelfreqnotify'] = 'Notifications`s Frequency';
 $string['descfreqnotify'] = '';
+$string['labelfreqnotifyday'] = 'Notifications`s Day of Frequency';
+$string['descfreqnotifyday'] = '';
 $string['labeltimenotify'] = 'Time of Notify';
 $string['desctimenotify'] = '';
 $string['descadvsearch'] = ''; 
@@ -27,6 +29,8 @@ $string['labelinterval'] = 'Interval';
 $string['desinterval'] = '';
 $string['labelitemsperpage'] = 'Items per page';
 $string['desitemsperpage'] = '';
+
+$string['notificationsdisabled'] = 'Notifications disabled';
 
 //ADVANCED SEARCH
 $string['search'] = 'Search';

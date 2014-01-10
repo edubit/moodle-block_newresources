@@ -1,4 +1,7 @@
 <?php
+
+defined('MOODLE_INTERNAL') || die;
+
 $settings->add(new admin_setting_heading(
             'headerconfig',
             get_string('headerconfig', 'block_newresources'),
@@ -19,12 +22,19 @@ $settings->add(new admin_setting_configselect(
             'semanal', Array('diario'=>'Diário', 'semanal'=>'Semanal')
         ));
 
+$settings->add(new admin_setting_configselect(
+            'newresources/freqnotifyday',
+            get_string('labelfreqnotifyday', 'block_newresources'),
+            get_string('descfreqnotifyday', 'block_newresources'),
+            7, Array( 1=>get_string('monday', 'calendar'), 2=>get_string('tuesday', 'calendar'), 3=>get_string('wednesday', 'calendar'), 4=>get_string('thursday', 'calendar'), 5=>get_string('friday', 'calendar'), 6=>get_string('saturday', 'calendar'), 7=>get_string('sunday', 'calendar'))
+        ));
+
 $settings->add(new admin_setting_configtime(
             'newresources/hourstimenotify',
-            'newresources/minutestimenotify',
+            'minutestimenotify',
             get_string('labeltimenotify', 'block_newresources'),
             get_string('desctimenotify', 'block_newresources'),
-            ''
+            array('h' => 17, 'm' => 30)
         ));
 
 $settings->add(new admin_setting_heading(
