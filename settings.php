@@ -16,17 +16,10 @@ $settings->add(new admin_setting_configcheckbox(
         ));
 
 $settings->add(new admin_setting_configselect(
-            'newresources/freqnotify',
-            get_string('labelfreqnotify', 'block_newresources'),
-            get_string('descfreqnotify', 'block_newresources'),
-            'semanal', Array('diario'=>'Diário', 'semanal'=>'Semanal')
-        ));
-
-$settings->add(new admin_setting_configselect(
             'newresources/freqnotifyday',
             get_string('labelfreqnotifyday', 'block_newresources'),
             get_string('descfreqnotifyday', 'block_newresources'),
-            7, Array( 1=>get_string('monday', 'calendar'), 2=>get_string('tuesday', 'calendar'), 3=>get_string('wednesday', 'calendar'), 4=>get_string('thursday', 'calendar'), 5=>get_string('friday', 'calendar'), 6=>get_string('saturday', 'calendar'), 7=>get_string('sunday', 'calendar'))
+            0, Array(0=>get_string('alldays', 'block_newresources'), 1=>get_string('monday', 'calendar'), 2=>get_string('tuesday', 'calendar'), 3=>get_string('wednesday', 'calendar'), 4=>get_string('thursday', 'calendar'), 5=>get_string('friday', 'calendar'), 6=>get_string('saturday', 'calendar'), 7=>get_string('sunday', 'calendar'))
         ));
 
 $settings->add(new admin_setting_configtime(
