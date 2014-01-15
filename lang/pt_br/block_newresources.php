@@ -12,21 +12,29 @@ $string['newresources'] = 'Novos Recursos';
 $string['advsearch'] = 'Busca Avançada';
 $string['newresources:addinstance'] = 'Incluir o bloco Novos Recursos';
 $string['newresources:myaddinstance'] = 'Incluir o bloco Novos Recursos no My Moodle';
+$string['smallmessage'] = '{$a->user} enviado em {$a->name}';
 
 //CONFIGS
 $string['headerconfig'] = 'Config Header';
 $string['descconfig'] = '';
 $string['labelnotify'] = 'Notificação';
 $string['descnotify'] = '';
-$string['labelfreqnotify'] = 'Frequencia de Notificações';
-$string['descfreqnotify'] = '';
+$string['labelfreqnotifyday'] = 'Dia para notificar o aluno via e-mail';
+$string['descfreqnotifyday'] = '';
+$string['alldays'] = 'Todos os dias';
 $string['labeltimenotify'] = 'Horário de Notificação';
-$string['desctimenotify'] = '';
+$string['desctimenotify'] = 'Novos recursos publicados até essa hora';
 $string['descadvsearch'] = ''; 
 $string['labelinterval'] = 'Intervalo';
 $string['desinterval'] = 'Intervalo em dias padrão para o campo DATA de INICIO no formulário de Busca Avançada';
 $string['labelitemsperpage'] = 'Resultados por página';
 $string['desitemsperpage'] = 'Quantidade de Resultados por página na Busca Avançada';
+
+$string['notificationsdisabled'] = 'Notificações desativadas';
+
+//BLOCK-Configs
+$string['blocktitle'] = 'Título do Bloco';
+$string['numresourcesinstance'] = 'Número de itens visiveis no bloco';
 
 //ADVANCED SEARCH
 $string['search'] = 'Pesquisar';

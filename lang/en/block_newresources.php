@@ -12,18 +12,18 @@ $string['newresources'] = 'New Resources';
 $string['advsearch'] = 'Advanced Search';
 $string['newresources:addinstance'] = 'Add a new New Resources Block';
 $string['newresources:myaddinstance'] = 'Add a new New Resrources Block to the My Moodle page';
+$string['smallmessage'] = '{$a->user} posted in {$a->name}';
 
 //CONFIGS
 $string['headerconfig'] = 'Config Header';
 $string['descconfig'] = '';
 $string['labelnotify'] = 'Nofify';
 $string['descnotify'] = '';
-$string['labelfreqnotify'] = 'Notifications`s Frequency';
-$string['descfreqnotify'] = '';
 $string['labelfreqnotifyday'] = 'Notifications`s Day of Frequency';
 $string['descfreqnotifyday'] = '';
+$string['alldays'] = 'All days';
 $string['labeltimenotify'] = 'Time of Notify';
-$string['desctimenotify'] = '';
+$string['desctimenotify'] = 'New resources published until that time';
 $string['descadvsearch'] = ''; 
 $string['labelinterval'] = 'Interval';
 $string['desinterval'] = '';
@@ -31,6 +31,11 @@ $string['labelitemsperpage'] = 'Items per page';
 $string['desitemsperpage'] = '';
 
 $string['notificationsdisabled'] = 'Notifications disabled';
+
+//BLOCK-Configs
+$string['blocktitle'] = 'Title';
+$string['numresourcesinstance'] = 'Visible items';
+
 
 //ADVANCED SEARCH
 $string['search'] = 'Search';
