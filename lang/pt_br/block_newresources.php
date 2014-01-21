@@ -39,6 +39,7 @@ $string['numresourcesinstance'] = 'Número de itens visiveis no bloco';
 //ADVANCED SEARCH
 $string['search'] = 'Pesquisar';
 $string['dateend'] = 'Data final';
+$string['titleresource'] = 'Recurso'; 
 $string['titlecourse'] = 'Disciplina'; 
 $string['titleordescription'] = 'Título ou Descrição do Módulo';
 $string['datestart'] = 'Data de início';

@@ -57,14 +57,41 @@ if (is_array($datestart))
 if (is_array($dateend))
 	$dateend = make_timestamp($dateend['year'], $dateend['month'], $dateend['day'], $dateend['hour'], $dateend['minute']);
 
+$selectedcourses = '';
+//Transform Array in String
+if (is_array($titlecourse)) {
+	foreach ($titlecourse as $course) {
+		if ($selectedcourses) {
+			$selectedcourses .= ','.$course;
+		} else {
+			$selectedcourses = $course;
+			
+		}
+	}
+} else {
+	$selectedcourses = $titlecourse;
+}
+
+//Caso desfaca a selecao (fix)
+if ($selectedcourses == '_qf__force_multiselect_submission') {
+	$selectedcourses = '';
+}
 //Conditional Query
 $query = '';
 if ($datestart)
    $query .= ' AND cm.added > '.$datestart;
 if ($dateend)
    $query .= ' AND cm.added < '.$dateend;
-if ($titlecourse)
-   $query .= ' AND course.fullname like "%'.$titlecourse.'%"';
+if ($selectedcourses)
+   $query .= ' AND course.id in ('.$selectedcourses.')';
+
+//Search in table of Resources
+//Modules (3,8,11,12,15,17,20) = (book,folder,imscp,label,page,resource,url)
+$join = '';
+if ($titlemod) { 
+	$query .= ' AND (book.name like "%'.$titlemod.'%" OR book.intro like "%'.$titlemod.'%") '; //criteria
+	$join .= ' LEFT JOIN {book} AS book ON cm.module=book.id'; //joins
+}
 
 //Form
 $newresource = new newresource_form();
@@ -99,19 +126,30 @@ if (isloggedin() && $mycourses) {
 	$countmods =  count($DB->get_records_sql('SELECT cm.id, course.id AS courseid, course.fullname AS coursename, cm.module AS moduleid, cm.instance, cm.section, cm.added, cm.visible, mods.name AS modulename 
 			FROM {course_modules} AS cm
 			JOIN {modules} AS mods
-			JOIN {course} AS course
+			JOIN {course} AS course 
+			'.$join.'
 			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
 			'.$query));
 	$mods = $DB->get_records_sql('SELECT cm.id, course.id AS courseid, course.fullname AS coursename, cm.module AS moduleid, cm.instance, cm.section, cm.added, cm.visible, mods.name AS modulename 
 			FROM {course_modules} AS cm
 			JOIN {modules} AS mods
 			JOIN {course} AS course
+			'.$join.'
 			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
 			'.$query.'
 			ORDER BY cm.added DESC',NULL, $perpage*$page, $perpage);
 
+echo 'SELECT cm.id, course.id AS courseid, course.fullname AS coursename, cm.module AS moduleid, cm.instance, cm.section, cm.added, cm.visible, mods.name AS modulename 
+			FROM {course_modules} AS cm
+			JOIN {modules} AS mods
+			JOIN {course} AS course
+			'.$join.'
+			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
+			'.$query.'
+			ORDER BY cm.added DESC';
+
 	$baseurl = new moodle_url('/blocks/newresources/view.php', array('courseid'=>$courseid,'blockid'=>$blockid,
-	'page'=>$page, 'perpage'=>$perpage, 'datestart'=>$datestart, 'dateend'=>$dateend, 'titlecourse'=>$titlecourse, 'titlemod'=>$titlemod,
+	'page'=>$page, 'perpage'=>$perpage, 'datestart'=>$datestart, 'dateend'=>$dateend, 'titlecourse'=>$selectedcourses, 'titlemod'=>$titlemod,
 	'sort' => 0, 'dir' => 0));
 	
 	echo $OUTPUT->paging_bar($countmods, $page, $perpage, $baseurl);
@@ -119,7 +157,7 @@ if (isloggedin() && $mycourses) {
 	//Print last New Resources
 	if ($mods) {
 		$table = new html_table();
-		$table->head = array(get_string('titlecourse','block_newresources'), get_string('dateadded','block_newresources'), get_string('titlecourse','block_newresources'));
+		$table->head = array(get_string('titleresource','block_newresources'), get_string('dateadded','block_newresources'), get_string('titlecourse','block_newresources'));
 		$table->data = array();
 		
 		foreach ($mods as $mod) {

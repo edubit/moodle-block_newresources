@@ -28,14 +28,19 @@ class newresource_form extends moodleform {
 		$mform->addRule('dateend', null, 'required', null, 'client');
 		
 		//Course
-		$mform->addElement('text', 'titlecourse', get_string('titlecourse', 'block_newresources'));
-		$mform->setType('titlecourse', PARAM_MULTILANG); 
+		$mycourses = enrol_get_my_courses($fields = NULL, $sort = 'fullname ASC', $limit = 0);
+		$list = Array();
+		foreach ($mycourses as $course) {
+			$list[$course->id] = $course->fullname;
+		}
+		$mform->addElement('select', 'titlecourse', get_string('titlecourse', 'block_newresources'), $list);
+		$mform->getElement('titlecourse')->setMultiple(true);
 		$mform->setAdvanced('titlecourse');
 		
 		//Title or Description
-// 		$mform->addElement('text', 'titlemod', get_string('titleordescription', 'block_newresources'));
-// 		$mform->setType('titlemod', PARAM_MULTILANG);
-// 		$mform->setAdvanced('titlemod');
+ 		$mform->addElement('text', 'titlemod', get_string('titleordescription', 'block_newresources'));
+ 		$mform->setType('titlemod', PARAM_MULTILANG);
+ 		$mform->setAdvanced('titlemod');
 
 		// Start Date
 		$mform->addElement('date_time_selector', 'datestart', get_string('datestart', 'block_newresources'), array('optional' => true));

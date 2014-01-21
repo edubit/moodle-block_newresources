@@ -36,10 +36,10 @@ $string['notificationsdisabled'] = 'Notifications disabled';
 $string['blocktitle'] = 'Title';
 $string['numresourcesinstance'] = 'Visible items';
 
-
 //ADVANCED SEARCH
 $string['search'] = 'Search';
 $string['dateend'] = 'End Date';
+$string['titleresource'] = 'Resource'; 
 $string['titlecourse'] = 'Course'; 
 $string['titleordescription'] = 'Title or Description of Module';
 $string['datestart'] = 'Start Date';
