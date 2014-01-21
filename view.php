@@ -17,6 +17,14 @@ global $DB, $OUTPUT, $PAGE;
 $interval = get_config('newresources', 'interval');
 $itemsperpage = get_config('newresources', 'itemsperpage');
 
+if (empty($interval)) {
+   $interval = 7;
+}
+
+if (empty($itemsperpage)) {
+   $itemsperpage = 10;
+}
+
 // Check for all required variables.
 $courseid = required_param('courseid', PARAM_INT);
 $blockid = required_param('blockid', PARAM_INT);
