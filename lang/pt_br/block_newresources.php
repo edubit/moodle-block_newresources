@@ -29,6 +29,7 @@ $string['labelinterval'] = 'Intervalo';
 $string['desinterval'] = 'Intervalo em dias padrão para o campo DATA de INICIO no formulário de Busca Avançada';
 $string['labelitemsperpage'] = 'Resultados por página';
 $string['desitemsperpage'] = 'Quantidade de Resultados por página na Busca Avançada';
+$string['defaulttitle'] = 'Título padrão';
 
 $string['notificationsdisabled'] = 'Notificações desativadas';
 
