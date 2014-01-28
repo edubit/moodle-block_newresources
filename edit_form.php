@@ -9,7 +9,7 @@ class block_newresources_edit_form extends block_edit_form {
         
         // A sample string variable with a default value.
 		$mform->addElement('text', 'config_title', get_string('blocktitle', 'block_newresources'));
-		$mform->setDefault('config_title', 'default value');
+		$mform->setDefault('config_title', get_string('pluginname', 'block_newresources'));
 		$mform->setType('config_title', PARAM_MULTILANG);
  
         // A sample string variable with a default value.

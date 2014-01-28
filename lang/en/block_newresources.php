@@ -29,6 +29,7 @@ $string['labelinterval'] = 'Interval';
 $string['desinterval'] = '';
 $string['labelitemsperpage'] = 'Items per page';
 $string['desitemsperpage'] = '';
+$string['defaulttitle'] = 'Default Title';
 
 $string['notificationsdisabled'] = 'Notifications disabled';
 
