@@ -37,7 +37,7 @@ $dateend = optional_param('dateend', time(), PARAM_INT);
 
 $titlecourse = optional_param('titlecourse', '', PARAM_TEXT);
 $titlemod = optional_param('titlemod', '', PARAM_TEXT);
- 
+
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourse', 'block_newresources', $courseid);
 }
@@ -95,10 +95,31 @@ if ($selectedcourses)
 
 //Search in table of Resources
 //Modules (3,8,11,12,15,17,20) = (book,folder,imscp,label,page,resource,url)
-$join = '';
 if ($titlemod) { 
-	$query .= ' AND (book.name like "%'.$titlemod.'%" OR book.intro like "%'.$titlemod.'%") '; //criteria
-	$join .= ' LEFT JOIN {book} AS book ON cm.module=book.id'; //joins
+	$query .= ' AND 
+(
+-- BOOK
+(cm.instance in (SELECT book.id FROM mdl_book AS book WHERE cm.instance = book.id AND 
+(book.name like "%'.$titlemod.'%" OR book.intro like "%'.$titlemod.'%")) AND mods.name="book") OR 
+-- PAGE
+(cm.instance in (SELECT page.id FROM mdl_page AS page WHERE cm.instance = page.id AND 
+(page.name like "%'.$titlemod.'%" OR page.intro like "%'.$titlemod.'%" OR page.content like "%'.$titlemod.'%")) AND mods.name="page") OR
+-- FOLDER
+(cm.instance in (SELECT folder.id FROM mdl_folder AS folder WHERE cm.instance = folder.id AND 
+(folder.name like "%'.$titlemod.'%" OR folder.intro like "%'.$titlemod.'%")) AND mods.name="folder") OR
+-- IMSCP
+(cm.instance in (SELECT imscp.id FROM mdl_imscp AS imscp WHERE cm.instance = imscp.id AND 
+(imscp.name like "%'.$titlemod.'%" OR imscp.intro like "%'.$titlemod.'%")) AND mods.name="imscp") OR
+-- LABEL
+(cm.instance in (SELECT label.id FROM mdl_label AS label WHERE cm.instance = label.id AND 
+(label.intro like "%'.$titlemod.'%")) AND mods.name="label") OR
+-- RESOURCE
+(cm.instance in (SELECT resource.id FROM mdl_resource AS resource WHERE cm.instance = resource.id AND 
+(resource.name like "%'.$titlemod.'%" OR resource.intro like "%'.$titlemod.'%")) AND mods.name="resource") OR
+-- URL
+(cm.instance in (SELECT url.id FROM mdl_url AS url WHERE cm.instance = url.id AND 
+(url.name like "%'.$titlemod.'%" OR url.intro like "%'.$titlemod.'%" OR url.externalurl like "%'.$titlemod.'%")) AND mods.name="url")
+) '; //criteria
 }
 
 //Form
@@ -135,26 +156,15 @@ if (isloggedin() && $mycourses) {
 			FROM {course_modules} AS cm
 			JOIN {modules} AS mods
 			JOIN {course} AS course 
-			'.$join.'
 			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
 			'.$query));
 	$mods = $DB->get_records_sql('SELECT cm.id, course.id AS courseid, course.fullname AS coursename, cm.module AS moduleid, cm.instance, cm.section, cm.added, cm.visible, mods.name AS modulename 
 			FROM {course_modules} AS cm
 			JOIN {modules} AS mods
 			JOIN {course} AS course
-			'.$join.'
 			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
 			'.$query.'
 			ORDER BY cm.added DESC',NULL, $perpage*$page, $perpage);
-
-echo 'SELECT cm.id, course.id AS courseid, course.fullname AS coursename, cm.module AS moduleid, cm.instance, cm.section, cm.added, cm.visible, mods.name AS modulename 
-			FROM {course_modules} AS cm
-			JOIN {modules} AS mods
-			JOIN {course} AS course
-			'.$join.'
-			WHERE cm.course=course.id AND cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
-			'.$query.'
-			ORDER BY cm.added DESC';
 
 	$baseurl = new moodle_url('/blocks/newresources/view.php', array('courseid'=>$courseid,'blockid'=>$blockid,
 	'page'=>$page, 'perpage'=>$perpage, 'datestart'=>$datestart, 'dateend'=>$dateend, 'titlecourse'=>$selectedcourses, 'titlemod'=>$titlemod,

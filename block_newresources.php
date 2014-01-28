@@ -61,6 +61,7 @@ class block_newresources extends block_base {
 					JOIN {modules} AS mods
 					WHERE cm.module=mods.id AND cm.course in ('.$courses.') AND cm.module in (3,8,11,12,15,17,20) AND cm.visible=1 
 					ORDER BY cm.added DESC',NULL,NULL,$limitcourses);
+			//Modules (3,8,11,12,15,17,20) = (book,folder,imscp,label,page,resource,url)
 
 			//Print last New Resources
 			if ($mods) {
