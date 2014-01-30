@@ -71,12 +71,12 @@ class block_newresources extends block_base {
 					$cm = $modinfo[$mod->course]->get_cm($mod->id);
 					//Added date Module
 					$addeddate = usergetdate($mod->added);
-					$addeddate = $addeddate['mday'].'/'.$addeddate['mon'].'/'.$addeddate['year'].' - '.$addeddate['hours'].':'.$addeddate['minutes'];
+					$addeddate = $addeddate['mday'].'/'.$addeddate['mon'].'/'.$addeddate['year'];
 				
 					$this->content->text .= '<li>';
 					$this->content->text .= '<img src="'.$cm->get_icon_url().'" /> '.
                     html_writer::link($cm->get_url(), format_string($cm->name, true)).
-                    '<small> ('.$addeddate.')</small>';		
+                    '<small> ( '.$addeddate.' )</small>';		
 					$this->content->text .= '</li>';
 				}
 				$this->content->text .= '</ul>';			
