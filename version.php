@@ -10,7 +10,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2014013001;  // YYYYMMDDHH (year, month, day, 24-hr time)
+$plugin->version = 2014013015;  // YYYYMMDDHH (year, month, day, 24-hr time)
 $plugin->requires = 2013111800; // YYYYMMDDHH (This is the release version for Moodle 2.0)
 $plugin->component = 'block_newresources'; // Full name of the plugin (used for diagnostics)
-$plugin->cron = 1; // Set min time between cron executions to 5 minutes, in seconds
+$plugin->cron = 23*60*60; // Set min time between cron executions to 5 minutes, in seconds
