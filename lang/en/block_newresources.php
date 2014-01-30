@@ -7,7 +7,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'New Resources Block';
+$string['pluginname'] = 'New Resources';
 $string['newresources'] = 'New Resources';
 $string['advsearch'] = 'Advanced Search';
 $string['newresources:addinstance'] = 'Add a new New Resources Block';
