@@ -76,7 +76,7 @@ class block_newresources extends block_base {
 					$this->content->text .= '<li>';
 					$this->content->text .= '<img src="'.$cm->get_icon_url().'" /> '.
                     html_writer::link($cm->get_url(), format_string($cm->name, true)).
-                    '<small> ( '.$addeddate.' )</small>';		
+                    '<small> ('.$addeddate.')</small>';		
 					$this->content->text .= '</li>';
 				}
 				$this->content->text .= '</ul>';			

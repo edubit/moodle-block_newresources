@@ -183,7 +183,7 @@ if (isloggedin() && $mycourses) {
 			$cm = $modinfo[$mod->courseid]->get_cm($mod->id);
 			//Added date Module
 			$addeddate = usergetdate($mod->added);
-			$addeddate = $addeddate['mday'].'/'.$addeddate['mon'].'/'.$addeddate['year'].' - '.$addeddate['hours'].':'.$addeddate['minutes'];
+			$addeddate = $addeddate['mday'].'/'.$addeddate['mon'].'/'.$addeddate['year'];
 		
 			$table->data[] = array ('<img src="'.$cm->get_icon_url().'" /> '.
 			html_writer::link($cm->get_url(), format_string($cm->name, true)), $addeddate, 
