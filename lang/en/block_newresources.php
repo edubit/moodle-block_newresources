@@ -15,9 +15,9 @@ $string['newresources:myaddinstance'] = 'Add a new New Resrources Block to the M
 $string['smallmessage'] = '{$a->user} posted in {$a->name}';
 
 //CONFIGS
-$string['headerconfig'] = 'Config Header';
+$string['headerconfig'] = 'Alert Setings';
 $string['descconfig'] = '';
-$string['labelnotify'] = 'Nofify';
+$string['labelnotify'] = 'Send email notification to students';
 $string['descnotify'] = '';
 $string['labelfreqnotifyday'] = 'Notifications`s Day of Frequency';
 $string['descfreqnotifyday'] = '';

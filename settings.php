@@ -12,7 +12,7 @@ $settings->add(new admin_setting_configcheckbox(
             'newresources/notify',
             get_string('labelnotify', 'block_newresources'),
             get_string('descnotify', 'block_newresources'),
-            '1'
+            '0'
         ));
 
 $settings->add(new admin_setting_configselect(
@@ -49,3 +49,9 @@ $settings->add(new admin_setting_configtext(
             get_string('desitemsperpage', 'block_newresources'),
             '10'
         ));
+$settings->add(new admin_setting_configempty(
+            'newresources/lastrun',
+            '',
+            ''
+        ));
+

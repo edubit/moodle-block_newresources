@@ -15,9 +15,9 @@ $string['newresources:myaddinstance'] = 'Incluir o bloco Novos Recursos no My Mo
 $string['smallmessage'] = '{$a->user} enviado em {$a->name}';
 
 //CONFIGS
-$string['headerconfig'] = 'Config Header';
+$string['headerconfig'] = 'Configurações de notificação';
 $string['descconfig'] = '';
-$string['labelnotify'] = 'Notificação';
+$string['labelnotify'] = 'Enviar notificação por email';
 $string['descnotify'] = '';
 $string['labelfreqnotifyday'] = 'Dia para notificar o aluno via e-mail';
 $string['descfreqnotifyday'] = '';
