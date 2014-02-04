@@ -23,11 +23,12 @@ class newresource_form extends moodleform {
 		$mform->addElement('header', 'search', get_string('search', 'block_newresources'), null, false);
 		
 		// Start Date
-		$mform->addElement('date_time_selector', 'datestart', get_string('datestart', 'block_newresources'), array('optional' => true));
+		$mform->addElement('date_time_selector', 'datestart', get_string('datestart', 'block_newresources'), array('optional' => false));
+		$mform->addRule('datestart', null, 'required', null, 'client');
 
 		//End Date
 		$mform->addElement('date_time_selector', 'dateend', get_string('dateend', 'block_newresources'), array('optional' => false));
-		$mform->addRule('dateend', null, 'required', null, 'client');
+		$mform->setAdvanced('dateend');
 		
 		//Course
 		$mycourses = enrol_get_my_courses($fields = NULL, $sort = 'fullname ASC', $limit = 0);
