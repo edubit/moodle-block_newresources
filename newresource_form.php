@@ -20,10 +20,12 @@ class newresource_form extends moodleform {
 
         $mform =& $this->_form;
         
-		// add optional grouping
 		$mform->addElement('header', 'search', get_string('search', 'block_newresources'), null, false);
 		
-		// add page title element
+		// Start Date
+		$mform->addElement('date_time_selector', 'datestart', get_string('datestart', 'block_newresources'), array('optional' => true));
+
+		//End Date
 		$mform->addElement('date_time_selector', 'dateend', get_string('dateend', 'block_newresources'), array('optional' => false));
 		$mform->addRule('dateend', null, 'required', null, 'client');
 		
@@ -42,9 +44,7 @@ class newresource_form extends moodleform {
  		$mform->setType('titlemod', PARAM_MULTILANG);
  		$mform->setAdvanced('titlemod');
 
-		// Start Date
-		$mform->addElement('date_time_selector', 'datestart', get_string('datestart', 'block_newresources'), array('optional' => true));
-		$mform->setAdvanced('datestart');
+
         
 		$this->add_action_buttons(false, get_string('search', 'block_newresources'));
 
